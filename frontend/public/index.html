@@ -1,14 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="angularMojoTodoApp">
     <head>
         <meta charset="utf-8">
         <title>AngularJS, Mojolicious: Todo Application</title>
         <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
+		<link rel="stylesheet" href="css/app.css"/>
         
         <script src="lib/jquery/jquery.js"></script>
         <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="lib/angular/angular.js"></script>
     </head>
     <body>
-		<h1>Perl Mongers Presentation - RESTful Web Application with AngularJS and Mojolicious</h1>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <a class="navbar-brand" href="#">AngularJS, Mojolicious: Todo Application</a>
+	        </div>
+	      </div>
+	    </div>
+			
+		<div class="container">
+			<div class="starter-template">
+				<h1>Perl Mongers Presentation - RESTful Web Application with AngularJS and Mojolicious</h1>
+		
+				<p class="lead">This demonstrates a basic Angular {{ 'expression' + '.' }}
+			</div>
+		</div>
+		
+		<script src="js/app.js"></script>
     </body>
 </html>
