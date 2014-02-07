@@ -1,0 +1,16 @@
+{
+  "name": "angular-mojo-todo",
+  "version": "0.1.0",
+  "dependencies": {
+    "angular": "latest",
+    "angular-cookies": "latest",
+    "angularLocalStorage": "latest",
+    "angular-route": "latest",
+    "underscore": "latest",
+    "restangular": "latest",
+    "bootstrap": "latest"
+  },
+  "resolutions": {
+    "angular": "1.2.11"
+  }
+}
