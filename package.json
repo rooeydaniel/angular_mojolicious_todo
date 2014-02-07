@@ -1,0 +1,14 @@
+{
+    "name": "angular-mojo-todo",
+    "description": "Perl Mongers Presentation - RESTful Web Application with AngularJS and Mojolicious",
+    "repository": "https://github.com/rooeydaniel/angular-mojo-todo.git",
+    "engines": {
+        "node": "~0.10.23"
+    },
+    "dependencies": {
+        "bower": "~1.2.8",
+    },
+    "scripts": {
+        "postinstall": "./node_modules/bower/bin/bower install"
+    }
+}
