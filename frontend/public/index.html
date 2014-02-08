@@ -19,14 +19,35 @@
 	      </div>
 	    </div>
 			
-		<div class="container">
+		<div class="container" ng-controller="TodoController">
 			<div class="starter-template">
-				<h1>Perl Mongers Presentation - RESTful Web Application with AngularJS and Mojolicious</h1>
-		
-				<p class="lead">This demonstrates a basic Angular {{ 'expression' + '.' }}
+				<h2 class="sub-header">Current Todos</h2>
+				<p id="empty" ng-hide="todos.length || !loaded">There are currently no todos.</p>
+				
+				<div class="table-responsive">
+	            	<table class="table table-striped">
+	            		<thead>
+	            			<tr>
+								<th>Complete</th>
+	            				<th>Title</th>
+	                		</tr>
+	              	  	</thead>
+	              	  	<tbody>
+	                		<tr ng-repeat="todo in todos">
+								<td>
+									<label class="checkbox">
+										<input type="checkbox" ng-model="todo.completed" />
+									</label>
+								</td>
+	                  		  	<td style="text-align: left;">{{ todo.title }}</td>
+	                	  	</tr>
+					  	</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		
 		<script src="js/app.js"></script>
+		<script src="js/controllers.js"></script>
     </body>
 </html>
