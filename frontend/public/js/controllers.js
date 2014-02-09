@@ -1,15 +1,14 @@
 'use strict';
 
 angular.module('angularMojoTodoApp.controllers', [])
-	.controller('TodoController', ['$scope', '$http', function($scope, $http) {
+	.controller('TodoController', ['$scope', '$http', 'Restangular', function($scope, $http, Restangular) {
 		$scope.todos = []; // Declare and initialize to an empty array	
 		
-		$http.get('/public/json/todos.json')
-		    .success(function(todos) {
-		      $scope.loaded = true;
-		      $scope.todos = todos;
-		    }).error(function(err) {
-		      console.log('Error: ' + err);
-		    });
-		
+		Restangular.all('todos').customGET()
+            .then(function (data) {
+				console.log("Todos: " + JSON.stringify(data));
+                $scope.todos = data;
+            }), function (response) {
+            	console.log("Error retrieving todos: " + response);
+        	};
 	}]);
