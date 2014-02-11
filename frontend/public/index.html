@@ -35,6 +35,7 @@
 	            			<tr>
 								<th>Complete</th>
 	            				<th>Title</th>
+								<th>&nbsp;</th>
 	                		</tr>
 	              	  	</thead>
 	              	  	<tbody>
@@ -45,6 +46,7 @@
 									</label>
 								</td>
 	                  		  	<td style="text-align: left;">{{ todo.title }}</td>
+								<td><a class="btn btn-danger" ng-click="removeTodo(todo)"><i class="icon-trash icon-white"></i>Delete</a>
 	                	  	</tr>
 					  	</tbody>
 					</table>
