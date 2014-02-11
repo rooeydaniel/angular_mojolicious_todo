@@ -25,8 +25,8 @@
 				<p id="empty" ng-hide="todos.length || !loaded">There are currently no todos.</p>
 
 				<form class="form-inline">
-                      <input id="toto-title" type="text" ng-model="todoTitle" />
-                      <button id="add-btn" class="btn btn-success" ng-click="addTodo(todoTitle)">Add</button>
+                      <input id="toto-title" type="text" ng-model="todo.title" />
+                      <button id="add-btn" class="btn btn-success" ng-click="addTodo(todo);">Add</button>
                  </form>
                 
 				<div class="table-responsive">
@@ -38,10 +38,10 @@
 	                		</tr>
 	              	  	</thead>
 	              	  	<tbody>
-	                		<tr ng-repeat="todo in todos">
+								<tr ng-repeat="todo in todos">
 								<td>
 									<label class="checkbox">
-										<input type="checkbox" ng-model="todo.completed" />
+										<input type="checkbox" ng-checked="todo.completed" ng-model="todo.completed" ng-change="changeCompleted(todo)"/>
 									</label>
 								</td>
 	                  		  	<td style="text-align: left;">{{ todo.title }}</td>
