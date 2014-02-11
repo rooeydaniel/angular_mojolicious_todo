@@ -2,15 +2,8 @@
 
 use Mojolicious::Lite;
 
-get '/todos' => sub {
-	my $self = shift;
-	
-	$self->res->headers->header('Access-Control-Allow-Origin' => 'http://localhost:8000');
-	
-	return $self->render (
-		json => 
-			[ 
-			  	{
+my @data = [
+				{
 					id => 1,
 					title => "Demo Todo Title One",
 					completed => "false"
@@ -30,8 +23,28 @@ get '/todos' => sub {
 					title => "Demo Todo Title Four",
 					completed => "false"
 				}
-			]
-		)
+			];
+			
+my $count = 4;
+
+get '/todos' => sub {
+	my $self = shift;
+	
+	return $self->render(json => @data);
 };
+
+post '/todo' => sub {
+	my $self = shift;
+		
+	push($data[0], { id => $count+1, title => $self->param('todoTitle'), completed => "false" });
+	$count++;
+	
+	return $self->render(json => @data);
+};
+
+app->hook(before_routes => sub {
+	my $c = shift;
+ 	$c->res->headers->header('Access-Control-Allow-Origin' => 'http://localhost:8000');
+});
 
 app->start;
