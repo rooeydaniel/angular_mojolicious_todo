@@ -41,11 +41,10 @@ group {
 		return $self->render(json => @data);
 	};
 
-	any any [qw(PUT POST OPTIONS)] => '/todo' => sub {
+	any [qw(PUT POST OPTIONS)] => '/todo' => sub {
 		my $self = shift;
 		
 		my $method = $self->req->method;
-		
 		if ($method eq "POST") {
 			push($data[0], { id => $count+1, title => $self->param('todoTitle'), completed => 0 });
 			$count++;
@@ -60,14 +59,37 @@ group {
 					if ($$d[$key]{id} == $id) {
 						$$d[$key]{title} = $title;
 						$$d[$key]{completed} = ($completed eq "true") ? 1 : 0;
+						last;
 					}
 				}
 			}
 		}
-		else {
-			print "OPTIONS hit here\n";
-		}
 	
+		return $self->render(json => @data);
+	};
+	
+	any [qw(DELETE OPTIONS)] => '/todo/:id' => sub {
+		my $self = shift;
+	
+		my $method = $self->req->method;
+		if ($method eq "DELETE") {
+			my $id  = $self->stash('id');
+			print "ID: " . $id . "\n";
+			
+			my @temp = [];
+	  
+			for my $d (@data) {
+				foreach my $key (keys $d) {
+					if ($$d[$key]{id} != $id) {
+						print "Here with id: " . $$d[$key]{id} . "\n";
+						push($temp[0], {id => $$d[$key]{id}, title => $$d[$key]{title}, completed => $$d[$key]{completed} });
+					}
+				}
+			}
+			
+			@data = @temp;
+		}
+		
 		return $self->render(json => @data);
 	};
 };
@@ -75,7 +97,7 @@ group {
 app->hook(before_routes => sub {
 	my $c = shift;
  	$c->res->headers->header('Access-Control-Allow-Origin' => 'http://localhost:8000');
-	$c->res->headers->header('Access-Control-Allow-Methods' => 'GET, POST, PUT, OPTIONS');
+	$c->res->headers->header('Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
 app->start;

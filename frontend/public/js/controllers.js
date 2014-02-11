@@ -43,5 +43,17 @@ angular.module('angularMojoTodoApp.controllers', [])
             });
 		};
 		
+		$scope.removeTodo = function(data) {
+			$http.delete('http://localhost:3000/public/todo/' + data.id, {
+                headers: {'Content-Type': undefined },
+                transformRequest: angular.identity
+            }).success(function (data) {
+				console.log(JSON.stringify(data));
+				$scope.todos = data;
+            }).error(function (response) {
+				console.log('Response: ' + response);
+            });
+		}
+		
 		$scope.showCompleted = 0;
 	}]);
